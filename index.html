@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081a2d">
+  <meta name="description" content="Sodaro inspection training prototype: photograph three classroom practice cards and learn about California safety checks.">
+  <link rel="icon" type="image/png" href="./assets/app-icon.png">
+  <link rel="apple-touch-icon" href="./assets/app-icon.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+  
+  <link rel="stylesheet" href="./style.css">
+  <title>Sodaro · Inspection Check</title>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#top" aria-label="Sodaro home">
+        <img src="./assets/brain-logo.png" alt="Sodaro blue circuit-brain logo" class="brand-img">
+        <span><strong>Sodaro</strong><small>Oakland business helper</small></span>
+      </a>
+      <span class="prototype-pill"><span class="pill-dot"></span> CLASSROOM DEMO</span>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-topline"><span class="mono-dot"></span> INSPECTION PREP / INTERACTIVE EXPERIENCE</div>
+        <div class="hero-grid">
+          <div>
+            <h1>A smarter way to <em>see</em> safety.</h1>
+            <p class="hero-sub">Use your phone to check three real-world-style examples. Sodaro shows what could fail, what looks okay, and what California rules say.</p>
+            <div class="hero-cta">
+              <button class="primary" type="button" data-start-camera><span aria-hidden="true">▣</span> Try inspection camera</button>
+              <a class="secondary" href="#practice">Explore the 3 examples <span aria-hidden="true">↗</span></a>
+            </div>
+          </div>
+          <div class="hero-logo-wrap" aria-hidden="true">
+            <span class="hero-ring ring-one"></span><span class="hero-ring ring-two"></span>
+            <img src="./assets/brain-logo.png" alt="" class="hero-logo">
+            <span class="orb orb-one"></span><span class="orb orb-two"></span>
+          </div>
+        </div>
+        <div class="statline"><span><b>03</b> photo challenges</span><span><b>02</b> problem examples</span><span><b>01</b> visually clear example</span></div>
+      </section>
+
+      <section class="scanner-section" id="scanner">
+        <div class="section-intro">
+          <div><div class="eyebrow">FEATURE 02 / INSPECTION CHECK</div><h2>Point. Capture. Learn.</h2></div>
+          <span class="stage-chip">PRIVATE ON YOUR DEVICE</span>
+        </div>
+        <div class="workspace">
+          <div class="capture-panel">
+            <div class="panel-header"><span class="panel-title"><span class="tiny-square"></span> CAMERA SCANNER</span><span id="camera-status" class="camera-status">READY</span></div>
+            <div class="viewport" id="camera-viewport">
+              <div id="idle-screen" class="viewport-idle">
+                <div class="focus focus-tl"></div><div class="focus focus-tr"></div><div class="focus focus-bl"></div><div class="focus focus-br"></div>
+                <svg width="72" height="72" viewBox="0 0 80 80" fill="none" aria-hidden="true"><rect x="13" y="20" width="54" height="42" rx="8" stroke="currentColor" stroke-width="2"/><path d="M29 20l5-8h12l5 8" stroke="currentColor" stroke-width="2"/><circle cx="40" cy="41" r="12" stroke="currentColor" stroke-width="2"/><circle cx="59" cy="29" r="2" fill="currentColor"/></svg>
+                <strong>Ready to inspect?</strong><span>Photograph one printed practice card.<br>Include its colored square scan marker in the picture.</span>
+              </div>
+              <video id="camera-video" autoplay muted playsinline aria-label="Live camera preview" hidden></video>
+              <img id="photo-preview" alt="Selected inspection practice photo" hidden>
+              <div class="view-corners" id="live-corners" hidden><i></i><i></i><i></i><i></i></div>
+              <div class="scanline" id="scanline" hidden></div>
+            </div>
+            <div class="capture-info" id="scanner-hint" role="status" aria-live="polite">Your photo stays on your phone. No server upload.</div>
+            <div class="controls">
+              <button type="button" class="primary btn-wide" id="take-photo">📷 &nbsp; Take a photo</button>
+              <button type="button" class="outline btn-wide" id="live-button">▣ &nbsp; Scan live</button>
+              <button type="button" class="text-button" id="choose-photo">Choose an existing photo instead</button>
+              <button type="button" class="text-button" id="reset-camera" hidden>Reset camera / check another</button>
+            </div>
+            <input id="capture-input" class="visually-hidden" type="file" accept="image/*" capture="environment" aria-label="Take a photo with your camera">
+            <input id="upload-input" class="visually-hidden" type="file" accept="image/*" aria-label="Choose an existing photo">
+          </div>
+          <div class="result-panel">
+            <div class="panel-header"><span class="panel-title"><span class="tiny-square"></span> SODARO ANALYSIS</span><span class="panel-index">01 / RESULT</span></div>
+            <div id="empty-result" class="result-empty">
+              <div class="pulse-disc"><span>?</span></div>
+              <h3>Your result appears here.</h3>
+              <p>Take a photo of any of the three printed sample cards. Sodaro will identify the training example, explain the visible issue, and suggest what to do next.</p>
+              <div class="preview-badges"><span>CODE REFERENCE</span><span>PASS / FAIL</span><span>NEXT STEPS</span></div>
+            </div>
+            <div id="result-content" class="result-content" hidden aria-live="polite">
+              <div id="result-banner" class="result-banner"><span id="result-symbol">✓</span><div><small id="result-label">VISIBLE CHECK</small><strong id="result-status">PASS</strong></div></div>
+              <div class="result-main"><span id="result-origin" class="result-origin"></span><h3 id="result-title"></h3><p id="result-description"></p></div>
+              <div class="result-subhead">RELATED CALIFORNIA REQUIREMENT</div>
+              <a id="result-law-link" class="law-link" href="#" target="_blank" rel="noopener noreferrer"><span id="result-law"></span><span aria-hidden="true">↗</span></a>
+              <div class="result-subhead">WHAT TO DO</div>
+              <ul id="result-actions" class="action-list"></ul>
+              <p class="result-warning" id="result-warning"></p>
+              <button id="copy-result" type="button" class="outline copy-btn">Copy result summary</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="practice-section" id="practice">
+        <div class="section-intro"><div><div class="eyebrow">TEST THE PROTOTYPE</div><h2>Three inspection scenes.</h2></div><span class="muted-small">Tap a sample to preview its explanation.</span></div>
+        <div class="sample-grid">
+          <button class="sample-card" type="button" data-demo="01" aria-label="Open practice sample 01">
+            <span class="sample-image"><img src="./assets/case-01.jpg" alt="Stainless steel handwashing sink crowded with dishes and a bucket"><span class="sample-label">PHOTO 01</span></span>
+            <span class="sample-bottom"><span><b>Handwashing area</b><small>Can you spot the issue?</small></span><span class="sample-arrow" aria-hidden="true">↗</span></span>
+          </button>
+          <button class="sample-card" type="button" data-demo="02" aria-label="Open practice sample 02">
+            <span class="sample-image"><img src="./assets/case-02.jpg" alt="Electrical wall box with exposed wires and no faceplate"><span class="sample-label">PHOTO 02</span></span>
+            <span class="sample-bottom"><span><b>Electrical equipment</b><small>Can you spot the issue?</small></span><span class="sample-arrow" aria-hidden="true">↗</span></span>
+          </button>
+          <button class="sample-card" type="button" data-demo="03" aria-label="Open practice sample 03">
+            <span class="sample-image"><img src="./assets/case-03.jpg" alt="Clean-looking commercial stainless steel prep counter and chopping board"><span class="sample-label">PHOTO 03</span></span>
+            <span class="sample-bottom"><span><b>Food preparation area</b><small>What do you observe?</small></span><span class="sample-arrow" aria-hidden="true">↗</span></span>
+          </button>
+        </div>
+        <p class="print-hint">For the live classroom challenge, print the separate PDF cards and scan their full page using your phone. These sample buttons provide a camera-free fallback.</p>
+      </section>
+
+      <section class="learn-section" id="about">
+        <div class="eyebrow">HOW THE DEMO WORKS</div><h2>Designed for real people,<br>not complicated paperwork.</h2>
+        <div class="steps"><div class="step"><span>01</span><h3>Print the cards</h3><p>Three restaurant and business-safety examples. The cards don’t reveal their answers.</p></div><div class="step"><span>02</span><h3>Use your phone</h3><p>Open this site, tap Take a photo, and include the brightly colored code box at the bottom of the card.</p></div><div class="step"><span>03</span><h3>Learn the reason</h3><p>Sodaro identifies the sample and shows the visible concern, California rule, and suggested action.</p></div></div>
+        <div class="notice"><strong>Important distinction:</strong> This educational prototype reads the printed card's training marker, not arbitrary hazards in an uncoded photograph. It is not an AI building inspector, does not measure temperature or sanitation, and cannot approve a business.</div>
+      </section>
+    </main>
+    <footer><div class="footer-brand"><img src="./assets/brain-logo.png" alt=""><span><b>Sodaro</b><small>An Oakland-first business support concept</small></span></div><div><a href="https://khmerxbxboi.github.io/Sodaro_first_patch/" target="_blank" rel="noopener noreferrer">Existing Sodaro prototype ↗</a><span>Student showcase • 2026</span></div></footer>
+  </div>
+  <nav class="mobile-nav" aria-label="Primary navigation"><a href="#top"><span>⌂</span>Home</a><a href="#scanner" class="active"><span>▣</span>Scan</a><a href="#practice"><span>▦</span>Samples</a><a href="#about"><span>ⓘ</span>About</a></nav>
+  
+  <script defer src="./app.js"></script>
+</body>
+</html>

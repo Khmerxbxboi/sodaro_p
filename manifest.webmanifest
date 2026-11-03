@@ -1,0 +1,14 @@
+{
+  "name":"Sodaro Inspection Check",
+  "short_name":"Sodaro",
+  "description":"Classroom demo of three inspection practice examples",
+  "start_url":"./index.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#071726",
+  "theme_color":"#081a2d",
+  "icons":[
+    {"src":"./assets/app-icon.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./assets/app-icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
